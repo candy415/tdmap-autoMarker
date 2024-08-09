@@ -90,15 +90,7 @@ const showModal = async (markerLngLat: number[], cityName: string) => {
 
 // 通过城市名获取当前经纬度
 const getLocation = async (cityName: string) => {
-  const { data } = await axios({
-    url: 'https://api.tianditu.gov.cn/administrative',
-    method: 'get',
-    contentType: 'application/json;charset=utf-8',
-    params: {
-      tk: props.tk,
-      postStr: `{"searchWord": "${cityName}","searchType":"1","needSubInfo":"false","needAll":"false","needPolygon":"true","needPre":"true"}`
-    }
-  })
+  const { data } = await axios.get(`https://api.tianditu.gov.cn/v2/administrative?keyword=${name}&childLevel=0&extensions=true&tk=${props.tk}`)
   return data
 }
 
